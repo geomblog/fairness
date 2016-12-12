@@ -53,32 +53,178 @@
 
 <p>To answer these questions, we need to go back — all the way to the original ideas of justice and fairness in society. We also need to go forward — towards a mathematical framework for talking about justice and fairness in machine learning. I will talk about the growing landscape of research in algorithmic fairness: how we can reason systematically about biases in algorithms, and how we can make our algorithms fair(er).</p>
 
-<hr>
+<h3>
+<a id="course-mechanics" class="anchor" href="#course-mechanics" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Course Mechanics</h3>
+
+<p>This is a short (and intense) course. We'll cover material in two lecture chunks each day. But this is also a <strong>discussion</strong>, on a topic that's still very new and that has fluid boundaries and evolving formalisms. I've provided readings that are technical and non-technical in nature, and I expect (and hope!) that the presentations will provoke discussion, arguments, and new ideas. </p>
+
+<p>So <strong>please read the provided materials</strong> ahead of the lecture and come prepared with your questions, comments and critiques. You'll benefit the most from the material if you have time to engage with it. </p>
 
 <h3>
 <a id="syllabus" class="anchor" href="#syllabus" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Syllabus</h3>
 
-<hr>
+<ul>
+<li>
+<p>Dec 11: <strong>Preliminaries</strong></p>
+
+<p>Basics of machine learning -- supervised and unsupervised learning, empirical risk minimization, classifiers, regression, training and generalization. </p>
+
+<p><em>Readings</em>:</p>
+
+<ul>
+<li>Chapters 1 <a href="http://ciml.info/dl/v0_9/ciml-v0_9-ch01.pdf">(PDF)</a>, 3.1-3.4 <a href="http://ciml.info/dl/v0_9/ciml-v0_9-ch03.pdf">(PDF)</a> and 4 <a href="http://ciml.info/dl/v0_9/ciml-v0_9-ch04.pdf">(PDF)</a> of Hal Daumé's <a href="http://ciml.info">excellent book on ML</a>. </li>
+<li>Hal's <a href="http://nlpers.blogspot.com/2016/08/debugging-machine-learning.html">post on the ML development pipeline</a>. This is framed in terms of the way errors can creep into the modeling process, but it doubles as an excellent explanation of the pipeline itself. </li>
+</ul>
+</li>
+<li>
+<p>Dec 12: <strong>Automated Decision Making</strong></p>
+
+<p>​    Case studies of the use of machine learning in applications. An introduction to different formal notions of fairness.</p>
+
+<p><em>Readings</em> (applications):</p>
+
+<ul>
+<li>Criminal Justice:
+
+<ul>
+<li>Risk Assessment: (<a href="http://www.datacivilrights.org/pubs/2015-1027/Courts_and_Predictive_Algorithms.pdf">Primer</a>, <a href="http://www.datacivilrights.org/pubs/2015-1027/WDN-Courts_and_Predictive_Algorithms.pdf">discussion</a> from Data and Civil Rights Workshop)</li>
+<li>Predictive Policing: (<a href="http://www.datacivilrights.org/pubs/2015-1027/Predictive_Policing.pdf">Primer</a> and <a href="http://www.datacivilrights.org/pubs/2015-1027/WDN-Predictive_Policing.pdf">discussion</a>)</li>
+<li>Julia Angwin, Jeff Larson, Surya Mattu, Lauren Kirchner, <a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">“Machine Bias"</a>
+</li>
+<li><a href="http://fusion.net/story/283896/real-future-episode-12-predictive-policing/">Video showing predictive policing in action</a></li>
+</ul>
+</li>
+<li>Hiring:
 
 <ul>
 <li>
-<p>Dec 11</p>
-
-<p>testing content for Dec 11</p>
+<a href="http://venturebeat.com/2016/11/09/ai-is-helping-job-candidates-bypass-resume-bias-and-black-holes/">On how AI can be used in hiring</a> (by one company that provides solutions). <a href="http://www.ca.com/us/rewrite/articles/application-economy/can-artificial-intelligence-find-the-perfect-hire.html">Another perspective</a> </li>
+<li>
+<a href="http://delivery.acm.org/10.1145/2790000/2788619/p1969-li.pdf?ip=71.195.244.110&amp;id=2788619&amp;acc=OA&amp;key=4D4702B0C3E38B35%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35%2E4037F4931E565B6B&amp;CFID=872166982&amp;CFTOKEN=74413255&amp;__acm__=1480927397_b769b575e3f06e480d52f70766f3a596">Predicting Voice-elicited emotions</a> (from KDD 2015)</li>
+</ul>
 </li>
-<li>Dec 12</li>
-<li>Dec 13</li>
-<li>Dec 14</li>
-<li>Dec 15</li>
-<li>Dec 16</li>
-<li>Dec 17</li>
-<li>Dec 18</li>
-<li>Dec 19</li>
-<li>Dec 20</li>
+<li>Credit Scoring and Loans
+
+<ul>
+<li>China's new <a href="https://www.washingtonpost.com/world/asia_pacific/chinas-plan-to-organize-its-whole-society-around-big-data-a-rating-for-everyone/2016/10/20/1cd0dd9c-9516-11e6-ae9d-0030ac1899cd_story.html?utm_term=.f8184eeef71d">citizen scoring system</a>
+</li>
+</ul>
+</li>
+<li>Education:
+
+<ul>
+<li>
+<a href="https://fpf.org/wp-content/uploads/2016/03/Final_19Times-Data_Mar2016-1.pdf">"19 Ways Data Analysis Empowered Students and Schools"</a> pages 21-26.</li>
+<li><a href="http://www.chronicle.com.libproxy.ocean.edu:2048/article/This-Chart-Shows-the-Promise/234573">Promise and limits of learning analytics</a></li>
+</ul>
+</li>
+</ul>
+
+<p><em>Readings</em> (notions of fairness):</p>
+
+<ul>
+<li>
+<a href="Discrimination-aware%20data%20min-%20ing">Discrimination-aware data mining</a>.  (<em>discriminatory classifiers</em>)</li>
+<li>
+<a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=2&amp;ved=0ahUKEwiLtYnNit7QAhWHiVQKHcUaAE8QFggkMAE&amp;url=https%3A%2F%2Fpdfs.semanticscholar.org%2F1a43%2Fd5a8f3dd82a138c92911befba05ae98add27.pdf&amp;usg=AFQjCNHwZ1vsGzJRLsbv4QoW-gLX3DIyCg&amp;sig2=0TikurXGq184Xoqi7O6eMw">Data preprocessing techniques for classification without discrimination</a>.  (<em>statistical parity</em>)</li>
+<li>
+<a href="https://arxiv.org/abs/1104.3913">Fairness through awareness</a>.  (<em>individual fairness</em>)</li>
+<li>
+<a href="https://arxiv.org/abs/1412.3756">Certifying and removing disparate impact</a> (<em>disparate impact</em>)</li>
+<li>
+<a href="https://arxiv.org/abs/1610.02413">Equality of opportunity in supervised learning</a> and <a href="https://arxiv.org/abs/1610.08452">Fairness Beyond Disparate Treatment &amp; Disparate Impact: Learning Classification without Disparate Mistreatment</a> (<em>equalizing odds</em>)</li>
+<li>(<em>fairness in sequential learning</em>)</li>
+</ul>
+</li>
+<li>
+<p>Dec 13: <strong>Fairness Mechanisms</strong></p>
+
+<p>Understanding the different techniques for ensuring fairness in classification.</p>
+
+<p><em>Readings</em> (preprocessing and detection)</p>
+
+<ul>
+<li><a href="http://pages.di.unipi.it/ruggieri/Papers/tkdd.pdf">Detecting discriminatory rules in a rule-based system</a></li>
+<li>
+<a href="https://arxiv.org/abs/1412.3756">Detecting discriminatory black box decision-making</a> (and repairing it)</li>
+<li>
+<a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=2&amp;ved=0ahUKEwiLtYnNit7QAhWHiVQKHcUaAE8QFggkMAE&amp;url=https%3A%2F%2Fpdfs.semanticscholar.org%2F1a43%2Fd5a8f3dd82a138c92911befba05ae98add27.pdf&amp;usg=AFQjCNHwZ1vsGzJRLsbv4QoW-gLX3DIyCg&amp;sig2=0TikurXGq184Xoqi7O6eMw">Data preprocessing techniques for classification without discrimination</a>. </li>
+</ul>
+
+<p>​<em>Readings</em> (building a better classifier)</p>
+
+<ul>
+<li><a href="http://wwwis.win.tue.nl/%7Etcalders/pubs/ICDM2010KCP.pdf">Discrimination Aware Decision Tree Learning</a></li>
+<li><a href="https://pdfs.semanticscholar.org/a087/d3893af0276fe3b41924087670b03997f7af.pdf">Three Naive Bayes Approaches for Discrimination-Free Classification</a></li>
+<li><a href="https://arxiv.org/abs/1601.05764">A Confidence-Based Approach for Balancing Fairness and Accuracy</a></li>
+<li><a href="https://www.cs.toronto.edu/%7Etoni/Papers/icml-final.pdf">Learning Fair Representations</a></li>
+<li>Bandits</li>
+</ul>
+</li>
+<li><p>Dec 14: <strong>Fairness Mechanisms (continued)</strong></p></li>
+<li>
+<p>Dec 15: <strong>Belief Systems</strong></p>
+
+<p>Axiomatic foundations of fairness and justice. Rawls and beyond.</p>
+</li>
+<li>
+<p>Dec 16: <strong>Accountability</strong></p>
+
+<p>Probing black-box decision-makers: estimating influence of features.</p>
+
+<p><em>Readings</em>:</p>
+
+<ul>
+<li>Breiman's idea for testing classifiers (<a href="https://www.stat.berkeley.edu/%7Ebreiman/randomforest2001.pdf">Section 10</a>)</li>
+<li><a href="http://link.springer.com/article/10.1007/s10618-014-0368-8">A peek into the black box</a></li>
+<li><a href="https://www.andrew.cmu.edu/user/danupam/datta-sen-zick-oakland16.pdf">Algorithmic transparency via quantitative input influence</a></li>
+<li><a href="http://sorelle.friedler.net/papers/auditing_icdm_2016.pdf">Auditing Black-box Models for Indirect Influence.</a></li>
+</ul>
+</li>
+<li>
+<p>Dec 17: <strong>Interpretability</strong></p>
+
+<p>Building interpretable models.</p>
+
+<p><em>Readings</em>:</p>
+
+<ul>
+<li><a href="http://www.kdd.org/exploration_files/V15-01-01-Freitas.pdf">Comprehensible Classification Models: A Review</a></li>
+<li>
+<a href="https://arxiv.org/pdf/1503.07810v6.pdf">Interpretable Models for Recidivism Prediction</a> (based on the <a href="https://arxiv.org/abs/1405.4047">SLIM</a> model)</li>
+<li><a href="http://www.kdd.org/kdd2016/papers/files/rfp0573-ribeiroA.pdf">Modeling the Model</a></li>
+</ul>
+</li>
+<li>
+<p>Dec 18: <strong>Fairness, Accountability and Transparency in other areas of computer science</strong></p>
+
+<p>Beyond classification: unsupervised learning and representations</p>
+
+<p><em>Readings</em>:</p>
+
+<ul>
+<li>Gender bias in word embeddings: two views. 
+
+<ul>
+<li><a href="https://arxiv.org/abs/1607.06520">Man is to Computer Programmer as Woman is to Homemaker? Debiasing Word Embeddings</a></li>
+<li><a href="http://randomwalker.info/publications/language-bias.pdf">Semantics derived automatically from language corpora necessarily contain human biases</a></li>
+</ul>
+</li>
+<li><a href="https://arxiv.org/abs/1610.08559">Measuring fairness in ranked outputs.</a></li>
+<li>
+<a href="https://arxiv.org/abs/1610.06067">Fairness as a program property.</a> </li>
+</ul>
+</li>
+<li>
+<p>Dec 19: <strong>The Broader View</strong></p>
+
+<p>The influence of algorithmic decision-making in the law and policy. </p>
+</li>
+<li><p>Dec 20</p></li>
 </ul>
 
 <h3>
-<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Support or Contact</h3>
+<a id="contact" class="anchor" href="#contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contact</h3>
 
 <p>Email me at <a href="mailto:suresh@cs.utah.edu">suresh@cs.utah.edu</a></p>
       </section>
