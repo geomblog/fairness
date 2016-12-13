@@ -1,0 +1,646 @@
+%\documentclass[]{article}
+\documentclass[11pt]{paper}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{mathpazo}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+    \usepackage{xltxtra,xunicode}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+% use microtype if available
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+\usepackage{natbib}
+\bibliographystyle{plainnat}
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={Suresh Venkatasubramanian},
+            pdftitle={GIAN Course on Fairness, Accuracy and Transparency in Machine Learning},
+            colorlinks=true,
+            citecolor=blue,
+            urlcolor=blue,
+            linkcolor=magenta,
+            pdfborder={0 0 0}}
+\urlstyle{same}  % don't use monospace font for urls
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\setcounter{secnumdepth}{5}
+
+\title{GIAN Course on Fairness, Accuracy and Transparency in Machine Learning}
+\subtitle{Lecture 1}
+\author{Suresh Venkatasubramanian}
+\date{Dec 12, 2016}
+\begin{document}
+\maketitle
+
+\section{Review of machine learning
+concepts}\label{review-of-machine-learning-concepts}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  supervised learning
+\item
+  (binary) classification
+\item
+  regression
+\item
+  Standard models for supervised learning
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    SVMs
+  \item
+    decision trees
+  \item
+    Naive Bayes
+  \end{itemize}
+\item
+  unsupervised learning
+\item
+  clustering + dimensionality reduction
+\item
+  neural nets as nonlinear DR.
+\item
+  Mechanics of learning
+\item
+  training and test
+\item
+  generalization bounds
+\item
+  The learning pipeline
+\item
+  data wrangling, feature extraction, modeling and so on.
+\end{itemize}
+
+\section{Automated Decision Making}\label{automated-decision-making}
+
+While it would be hard to find any part of our daily lives that are
+\emph{not} touched by machine learning, the issues of fairness and
+accountability really come into play when we think about algorithms that
+make \emph{decisions} (or assist with them).
+
+So if we think of the classic binary classification problem where the
+goal is to determine a mapping $f $ from the input $X$ to the set
+$\{-1, 1\}$, we should instead think of a mapping into the
+\emph{decision space} $\{Y, N\}$. More generally, the mapping might not
+actually return a binary variable. Rather, it might return some kind of
+``risk score'' that we can interpret as a probability of $Y$. Or it
+might return a number that we will later threshold: for example the FICO
+score is a number whose maximum value is 850: a score of 700 or higher
+is deemed quite good.
+
+This decision could be anything: it could be the decision to place an ad
+on a web page, or the decision to make a recommendation to an user from
+a shopping website, or a recommendation for a route to take when asked
+for directions. It could even be the decision about \emph{what} to
+return in a search query,
+
+Decisions can be more complex: for example, the decision of how to rank
+results on a search query doesn't quite fit the model above. It can be
+modeled approximately by assuming that the decision task is to assign a
+rank to a search result. But for the purpose of discussion we'll stick
+to the binary output model (or in some cases its regression cousin).
+
+What I'd like to do is explore a few cases in some detail to understand
+\emph{how} the automated decision-making pipeline works. In some cases,
+the very fact that algorithms are being used might be considered
+surprising (or shocking!). But for any examination of the benefits (and
+dangers) of using automated methods to be thorough, we should walk
+through the different domains.
+
+These examples are (unfortunately) very specific to the US context: both
+in terms of what's currently going on and in terms of what the law
+allows. But I'd encourage you all to think about how these might (or do)
+apply in the context of Indian law as well.
+
+\subsection{Criminal Justice}\label{criminal-justice}
+
+Let's start with the most consequential example of the use of automated
+methods: in the criminal justice system. There is an entire pipeline of
+decisions that start with the question of how the police target areas
+(and individuals) for investigation and end with decisions about whether
+to release someone from jail on parole or not. This are usually
+described by two processes:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  predictive policing
+\item
+  risk assessment
+\end{enumerate}
+
+\subsubsection{Predictive policing}\label{predictive-policing}
+
+You've probably seen the scifi movie Minority Report which describes a
+near future where telepathically enhanced individuals ``predict'' crime
+before it happens. While predictive policing doesn't claim to go this
+far, it is an attempt to use prior crime history to predict crime in two
+ways:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  \textbf{where} crime is likely to happen
+\item
+  \textbf{who} might be committing a crime.
+\end{itemize}
+
+For the rest of this, we will discuss only the first kind of predictive
+model. It is being used widely across police departments. The second
+model is of uncertain legality and appears to be the domain of national
+intelligence services for the most part.
+
+The goal of spatial predictive policing is to determine where crime
+might be more likely to occur. The point of doing this is to manage the
+scarce resources of a police department: patrol officers, cars, and so
+on. If a department ``knows'' that a certain region of a precinct will
+be a crime ``hotspot'' that day, they can provision more officers to
+that area while patrolling less risky areas less frequently.
+
+For this purpose, a region of space is often subdivided into
+\emph{cells} --- say a few blocks across. The predictive task here is
+then: over a fixed time period $t$ (say a day), for each cell $c$ of a
+collection of cells, assign a score $s(c, t)$ that is higher if $c$ is
+likely to experience more crime during period $t$. In its simplest form,
+the score $s(c, t)$ could merely be a binary-valued variable indicating
+crime ($1$) or no-crime ($0$).
+
+In order to build this predictor, a learning algorithm might use a
+variety of data sources and features: these might include
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  crime reports to the police in $c$ over ``similar'' time periods in
+  the past.
+\item
+  actual arrests made in $c$
+\item
+  calls to emergency services (that may or may not result in an arrest
+  or even a crime report)
+\item
+  baseline demographic information in the cell.
+\item
+  information about special events that might influence crime rates and
+  reporting (for example, rioting in the streets after a sports event).
+\end{itemize}
+
+\subsubsection{Training data}\label{training-data}
+
+In predictive policing, training data is typically historical records of
+crime in the area, possibly qualified by time of year/season (for
+example data from the summer is used to predict crime in the summer, and
+so on).
+
+\subsubsection{Risk assessment}\label{risk-assessment}
+
+Risk assessment addresses the ``other'' side of criminal justice, after
+someone has been arrested for a crime. Risk assessment tools come into
+play at different stages of the conviction, sentencing and release
+pipeline, for example:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  should an undertrial be released on bail prior to the hearing
+\item
+  what duration sentence should a convicted individual be given within
+  the guidelines laid out by the law.
+\item
+  should an inmate be granted parole or sent back to prison.
+\end{itemize}
+
+Notice that risk assessment, unlike the standard use of predictive
+policing, is individual-based. In each case, the ``risk'' being assessed
+here is whether the individual represents an unreasonable risk (of
+fleeing before trial, of receiving an undeservedly lenient sentence, of
+committing new crimes) if released into the general population. The risk
+assessment algorithm will take as input features associated with an
+individual $p$ and output a \emph{risk score} $r(p)$ between $0$ and $1$
+(or in some interval) where $1$ represents a high risk of danger if $p$
+is released and $0$ represents no risk.
+
+Since these decisions are made for an individual, the features used tend
+to be more specific, they might include:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  demographics information about the individual
+\item
+  past history and nature of crimes
+\item
+  social milieu and network.
+\item
+  general psychological and emotional state.
+\end{itemize}
+
+For example, when an inmate comes up for parole, they are put through a
+battery of questions (137 in some cases) that span the range of topics
+mentioned above, and these are fed into a predictor to output a risk
+level between $1$ and $10$ of whether they'll recommit a crime within 6
+months of release (or within 2 years). \citep{angwin_machine_2016}
+
+The scores produced by risk assessment tools are typically not
+determinative: they are merely one feature provided to a judge to do
+with as they see fit. In fact, there are studies suggesting that the
+degree to which judges take risk assessments into consideration vary
+widely and inconsistently.
+
+\subsubsection{Training data}\label{training-data-1}
+
+In risk assessment, training data comes from prior records of bail
+violations, recidivism and so on. General demographics factors might
+also be used to condition the data (such as national or state averages
+of recidivism and so on)
+
+\subsection{Hiring}\label{hiring}
+
+For reasons of both scale (the number of applicants applying for jobs)
+and diversity (trying to ensure a broad representation of skills in the
+workforce), many companies are trying to go beyond the standard
+human-interview based model for hiring to take advantage of data
+analytics. The general goal is to predict which potential employees are
+likely to ``do well'' at their job. This can be interpreted in a variety
+of ways:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  likely to stay at the job for a sufficient period of time
+  (\emph{retention})
+\item
+  likely to have high productivity in the job (\emph{productivity})
+\item
+  likely to be content at the job (\emph{satisfaction}).
+\end{itemize}
+
+Note that the criteria don't necessarily measure the same attributes, an
+employee might be willing to stay at their job without being productive,
+and might be productive and yet unsatisfied.
+
+The idea therefore is to use predictive tools as well as new techniques
+for processing applicants to make such an assessment. Formally, just as
+above, the predictive tool would assign a score $s(p)$ to an applicant
+$p$ and then present this score to the hiring manager as part of a
+dashboard of information.
+
+What makes hiring interesting is the innovation that has taken place in
+\emph{how} the interviews are conducted and analyzed. It is now common
+for an applicant to undergo a fully automated initial screening or full
+interview, without any human intervention. These interviews can be video
+or text-based. In either case, the applicant is sent to a website to
+login to at a time of their choosing, and then the interview proceeds.
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  in a text-based interview, the applicant sees questions on the screen
+  and has to type out their answers. The answers are typically timed,
+  and while no attempt is made to prevent applicants from ``looking up''
+  answers, the questions are sufficiently open-ended as to preclude this
+  within the time specified. Such a process might even occur for tech
+  interviews where an applicant might be asked to write code or pseudo
+  code.
+\item
+  In a video-based interview, the applicant might either see questions
+  from a pre-recorded video, or might again see text questions. In
+  either case, the applicant records a video response (usually via their
+  webcam), and this is sent off for further analysis.
+\end{itemize}
+
+Once the responses have been received, the predictive model goes to
+work. It extracts features from the transcript: these might be text
+features - words, phrases, and so on. These might also be cues from the
+video. Face recognition software is used to identify micro-expressions
+in the face while the interviewee responds, and these are tagged with
+``standard'' interpretations (such as are used for example in
+lie-detection systems).
+
+This entire list of features is assembled into the input to a predictor,
+which then returns the desired score.
+
+\subsubsection{Training data}\label{training-data-2}
+
+When a third party vendor works with a company to build a predictive
+model, they might build a custom model for that organization. Every
+company might have different hiring needs --- a tech startup might be
+looking for different characteristics than a multinational hotel chain
+for example. A common way to acquire training data is therefore to look
+at past employee records to see how well they did, and build a
+predictive model from it.
+
+\subsection{Loans}\label{loans}
+
+When a bank issues a loan, their primary concern is credit-worthiness:
+will the loanee pay back the loan promptly and in full? For centuries,
+lenders have used many different strategies to assess credit-worthiness,
+including factors like collateral (what items can be used as a risk
+mitigator in case of default), history of loan repayment, behavioral
+attributes (does this individual indulge in risky behavior) and even
+background cultural context.
+
+In the US, loan granting was an area that was rife with racism and other
+forms of bias: indeed the term \emph{redlining} comes from the racist
+mortgage lending practices of the 1930s. In the 60s, an attempt to
+reform this process led to the development of what is now known as the
+FICO score: it ranges from 0-850 with a higher score indicating a more
+trustworthy borrower.
+
+Till the late 90s, the FICO score was the de facto tool for assessing
+credit-worthiness. It was used to both grant loans and even set the rate
+of a loan. But with the wild fluctuations in the stock market in the
+2000s (the tech market crash as well as the housing crisis), the FICO
+score is turning out to be less accurate as a predictor (because even
+potentially reliable borrowers have weak credit as seen through the FICO
+lens) and there is now a growing market in predictive models for
+credit-worthiness that take advantage of all the data out there to be
+mined.
+
+To formalize the predictive scenario as before, we assume that the model
+is presented with an individual $p$ and the goal is to output a score
+$s(p)$ that will indicate credit-worthiness. The lender might then use
+the score $s(p)$ and other information to generate an interest rate
+$r(p)$ for the individual, or a denial.
+
+Features that are now often used (but not always) to determine whether
+and how much for a loan should be granted include:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  social media presence: a facebook feed that indicates risk taking
+  behaviour might reduce the score for an individual.
+\item
+  online reviews: if you're a small business and you're on Yelp, your
+  reviews might be taken into account when decided how valuable your
+  business is.
+\end{itemize}
+
+What is perhaps more interesting is that there are now proposals to use
+extended social networks to model an individual's credit worthiness. For
+example, the Chinese government is planning to compute a ``citizen
+score'' that will be used for a number of government services including
+loans and jobs. Their proposal is to use not just individual information
+but information about one's circle of friends (as captured by social
+media) to determine one's ``value'', with the full intention to use (for
+example) statements critical of the government --- even by one's friends
+--- as part of this computation.
+
+\subsubsection{Training data}\label{training-data-3}
+
+Training data for loan granting can come from a bank's prior customers.
+It is less clear how to build models for training from social media: one
+possibility is that the model builder tracks the social media presence
+of successful borrowers, and also obtains (via data brokers) information
+about rejected borrowers. There is a flourishing market in third party
+data scraped from various sources, involving large brokers like Acxiom
+and others.
+
+\section{Definitions of Fairness}\label{definitions-of-fairness}
+
+At the heart of discussions of bias is the corresponding question of
+fairness and nondiscrimination. What does it mean for an algorithm to be
+``fair'' or ``unfair''? It turns out that this question will not lend
+itself to an easy answer, and will force us to return to the underlying
+philosophical and ethical questions around the idea of a just society.
+But in the meantime we can review the different definitions of fairness
+that different researchers have either proposed or have modeled based on
+inspiration from the real world.
+
+In this discussion, we will only talk about the definitions themselves.
+We will defer discussions of mitigation (how to make sure biased
+patterns are not found) to a later lecture.
+
+\subsection{Bias based on learning
+rules}\label{bias-based-on-learning-rules}
+
+The first notion of bias in data mining is due to Pedreschi, Ruggieri
+and Turini \citep{pedreshi_discrimination-aware_2008}, and originates
+from the area of itemset mining. In this setting, the data is
+represented as a relation with attributes $a_i$. A transaction can be
+thought of as a row in this table. An \emph{itemset} is a collection of
+attribute settings: for example, ``pin code - 560 076'', ``state = KN'',
+and so on. The support of an itemset $X$ is the fraction of transactions
+that satisfy it.
+
+Consider a classification rule $X \implies Y$ learned by a data mining
+system on a table. We can quantify our \emph{confidence} in this rule by
+measuring a proxy for the empirical probability $\Pr(Y \mid X)$:
+specifically,
+
+\[ \text{conf}(X \implies Y) = \frac{\text{support(X,Y)}}{\text{support(X)}} \]
+
+\subsubsection{Encoding beliefs about
+bias}\label{encoding-beliefs-about-bias}
+
+As we shall see, all attempts to determine bias in ML must have some
+external statement about what kinds of decisions might be considered
+biased: this is not something the modeling process will discover by
+itself. In the case of association rule mining, this information is
+encoded by marking certain itemsets $X$ as \emph{potentially
+discriminatory} (PD). For example, any rule of the form ``If female, do
+something'' has the itemset ``gender = Female'' as an antecedent and
+might be discriminatory in certain contexts. So we will assume \emph{a
+priori} that a set of such PD itemsets is provided to us.
+
+How do we measure bias then? The idea is to determine whether the PD
+itemsets made a \emph{material difference} in the confidence of the
+learned association rule. Specifically, let the \emph{extended lift} of
+a rule $A, B \implies C$ with respect to $B$ be the quantity
+
+\[ \text{elift} = \frac{\text{conf}(A, B, \implies C)}{\text{conf}(A \implies C)}\]
+
+Then they define a PD itemset $B$ as $\alpha$-discriminatory if
+$\text{elift} \ge \alpha$.
+
+Note that if the attribute $C$ is binary, then the implications
+$A \implies C$ and $A \implies !C$ are related, and a stronger notion of
+the extended lift can be defined in that setting.
+
+\subsection{Bias based on statistical
+discrepancy}\label{bias-based-on-statistical-discrepancy}
+
+At its core, the definition of bias is based on the idea of influence:
+how much does a particular variable appear to affect a decision? The
+next definition is more explicit, focusing directly on the outcome.
+
+Assume again that we have a data set with attributes $a_i$. Suppose the
+goal of the decision-making process is to determine some outcome encoded
+as $C$ where $C =1$ is the positive outcome. We will encode beliefs
+about bias by specifying a particular itemset of the form $a_i = v$. For
+example ``gender = FEMALE'' or ``race = non-white''. The key to this
+notion of bias measurement is to look at the (conditional) difference in
+the favorable outcome for the selected group (as encoded by the
+itemset). The conditional probability of the good outcome for the
+subgroup is given by
+
+\[ \frac{\Pr( C = 1 \mid X)}{\Pr(X)} \]
+
+Similarly, the conditional probability for the rest can be written as
+
+\[ \frac{\Pr( C = 1 \mid \overline{X})}{\Pr(\overline{X})} \]
+
+Then one measure of statistical bias is the difference between these
+numbers. \citep{kamiran_data_2012}
+
+\subsubsection{Disparate Impact}\label{disparate-impact}
+
+The above measure of bias is used in the United Kingdom to quantify
+gender-based discrimination. In the US, we instead take the \emph{ratio}
+of the two numbers. This is the basis of the ``80\% rule'' that says
+that the ratio of the two conditional probabilities must not be less
+than 4/5. \citep{feldman_certifying_2015}
+
+In both cases, the discriminatory attribute is fixed ahead of time. In
+the US for example, attributes like race, gender, ethnicity, and age are
+subject to such scrutiny. For age (which is a continuous variable), the
+binary variant is whether the age is less than or more than 40.
+
+\subsubsection{Equalizing odds}\label{equalizing-odds}
+
+One argument against bias measurements based on statistical discrepancy
+is that it may be that in the population at large, there is a natural
+and ``unbiased'' difference in skills based on the protected attribute
+$X$. For example, if the job involves lifting of heavy objects, then an
+employer might argue that the average male is better suited to the task
+than the average female by virtue of having better upper body strength,
+and so this discrepancy will naturally appear in the hiring ratios
+without being discriminatory.
+
+One way to address this issue is to require not that the different
+groups be treated equally, but that the decision procedure is equally
+accurate (or inaccurate) on the two groups. Thus far we have assumed a
+decision variable $C$ and the group attribute $X$. Let us now introduce
+the ground truth variable $C^*$. In other words, if $p$ is an
+individual, then $C(p)$ is the decision made by an algorithm and
+$C^*(p)$ is the decision it should have made.
+
+The false positive rate for the predictor is
+$FP = \Pr(C = 1 \mid C^* = 0)$. Similarly the true positive rate is
+$TP = \Pr(C = 1 \mid C^* = 1)$. Suppose we evaluate $FP$ and $TP$
+conditioned by group membership. Then we want that these numbers are the
+same for the two groups.
+
+Another way to address the issue of equalizing odds is to instead try to
+equalize the probability of misclassification conditioned by group. In
+other words,
+
+\[ \Pr(C \ne C^* \mid X = 1) = \Pr(C \ne C^* \mid X = 0)\]
+
+\citep{zafar_fairness_2016}
+
+\subsection{Fairness through
+Awareness}\label{fairness-through-awareness}
+
+In all of the above, we're really considering the problem of
+nondiscrimination: how to make sure that different groups are treated
+fairly, for differing definitions of fair. But we can also take a very
+different perspective on the problem of fairness. Rather than ensuring
+that groups are treated similarly, we attempt to ensure that
+\emph{individuals} are treated fairly. A formal notion of individual
+fairness was given by Dwork et. al. in 2011 \citep{dwork_fairness_2012}
+
+Assume that for a given task, we have some sense of how close
+individuals are with respect to competency for that task For example
+this could be encoded as some kind of distance function $d(p, p')$.
+Further, assume that the outcome is the result of a randomized
+procedure, so that over repeated trials of the algorithm we can talk
+about the probability of the outcome $C = 1$ and more generally
+associate a rule with a distribution over outcomes for each individual.
+Then the idea of \emph{individual fairness} says that two individuals
+who are close should be treated similarly. Formally, suppose we have
+some measure of distance between distributions $D$. Then
+
+\[ d(x,y) \le \epsilon \implies D(C(x), C(y)) \le \delta\].
+
+Notice that this is a fundamentally different notion from group
+fairness. Indeed it is easy to design scenarios where one of these
+notions is satisfied but not the other, and so on.
+
+\subsection{Fairness in Sequential
+learning}\label{fairness-in-sequential-learning}
+
+Thus far, we've considered fairness in the supervised (and batch) model
+of learning. There's a classifier, training data, test data and so on.
+But automated decision-making is an ongoing process, where the model
+might keep adapting to the data and making new decisions. While there's
+a whole issue of consistency in decision-making that we will not
+address, there's a more basic question of what fairness means in such a
+context.
+
+One of the standard settings for thinking about sequential learning is
+the bandit model. While I won't go into details about the bandit
+framework in learning, I'll set up some basic notation.
+
+Assume the bandit has $k$ arms. At each step $t$ the algorithm chooses
+one arm $i_t$ from a distribution $\pi^t$ over $[k]$ and receives the
+(stochastic) reward drawn $r_j$ drawn from an \textbf{unknown}
+distribution $\mathcal{D}_j$ with mean $\mu_j$. It then updates $\pi^t$
+to get $\pi^{t+1}$ and the process repeats. The \emph{regret} of the
+algorithm is the difference between its expected reward and the best
+expected reward. Since the best expected reward is obtained by always
+choosing the arm $i^*$ with the largest expected reward $\mu_{i^*}$, we
+can write the regret as
+
+\[ T \cdot \mu_{i^*} - E \sum \mu_{i^t} \]
+
+Let us denote the \emph{history} of the process $h^t$ as the sequence of
+decisions made by the algorithm till time $t$. This includes all choices
+of arms to pull and all rewards obtained. At time $t$, we can now define
+the quantity $\pi_{j \mid h^t}$ as the probability that the algorithm
+chooses arm $j$ at time $t$ given the entire history $h^t$.
+
+We're now ready to define a notion of fairness for sequential learning.
+Intuitively, the definition attempts to capture the idea that if the
+baseline value of one arm is more than another, the algorithm should
+choose it. Formally, an algorithm is $\delta$-fair\citep{joseph_fairness_2016} if for all
+distributions $\mathcal{D}_1, \ldots, \mathcal{D}_k$, with probability
+at least $1-\delta$ over the history, for all $t$ and all arms
+$j, j' \in [k]$,
+
+\[ \pi^t_{j\mid h} > \pi^t_{j' \mid h} \text{only if  } \mu_j > \mu_{j'} ​\]
+
+The intuition behind this definition is this: the only justification for
+choosing one arm over another should be if there's a measurable benefit
+to taking that arm. If we (for example) think of arms as individuals,
+then we are trying to capture the idea a la individual fairness that the
+only justifiable reason for different treatment is different underlying
+quality (this is the contrapositive of the way individual fairness is
+framed).
+
+% \subsection{Notes}\label{notes}
+
+% CCTNS is a system being used in India for predictive policing
+
+% CIBIL is the Indian equivalent of FICO
+
+% the IFMR is an institute in Chennai that does research into loans and
+% has found that caste appears to play a significant role in the process.
+
+\bibliography{fatcs}
+\end{document}
