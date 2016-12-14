@@ -23,7 +23,6 @@ So **please read the provided materials** ahead of the lecture and come prepared
       Case studies of the use of machine learning in applications. An introduction to different formal notions of fairness.
 
       *Readings* (applications):
-
     * Criminal Justice:
       * Risk Assessment: ([Primer](http://www.datacivilrights.org/pubs/2015-1027/Courts_and_Predictive_Algorithms.pdf), [discussion](http://www.datacivilrights.org/pubs/2015-1027/WDN-Courts_and_Predictive_Algorithms.pdf) from Data and Civil Rights Workshop)
       * Predictive Policing: ([Primer](http://www.datacivilrights.org/pubs/2015-1027/Predictive_Policing.pdf) and [discussion](http://www.datacivilrights.org/pubs/2015-1027/WDN-Predictive_Policing.pdf))
@@ -55,21 +54,19 @@ So **please read the provided materials** ahead of the lecture and come prepared
     * [Detecting discriminatory black box decision-making](https://arxiv.org/abs/1412.3756) (and repairing it)
     * [Data preprocessing techniques for classification without discrimination](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2&ved=0ahUKEwiLtYnNit7QAhWHiVQKHcUaAE8QFggkMAE&url=https%3A%2F%2Fpdfs.semanticscholar.org%2F1a43%2Fd5a8f3dd82a138c92911befba05ae98add27.pdf&usg=AFQjCNHwZ1vsGzJRLsbv4QoW-gLX3DIyCg&sig2=0TikurXGq184Xoqi7O6eMw). 
 
+*   Dec 14: **Fairness Mechanisms** (continued)
+
     *Readings* (building a better classifier)
 
-    * [Discrimination Aware Decision Tree Learning](http://wwwis.win.tue.nl/~tcalders/pubs/ICDM2010KCP.pdf)
-    * [Three Naive Bayes Approaches for Discrimination-Free Classification](https://pdfs.semanticscholar.org/a087/d3893af0276fe3b41924087670b03997f7af.pdf)
-    * [A Confidence-Based Approach for Balancing Fairness and Accuracy](https://arxiv.org/abs/1601.05764)
-    * [Learning Fair Representations](https://www.cs.toronto.edu/~toni/Papers/icml-final.pdf)
-    * Bandits
+    - [Discrimination Aware Decision Tree Learning](http://wwwis.win.tue.nl/~tcalders/pubs/ICDM2010KCP.pdf)
+    - [Three Naive Bayes Approaches for Discrimination-Free Classification](https://pdfs.semanticscholar.org/a087/d3893af0276fe3b41924087670b03997f7af.pdf)
+    - [Fairness-aware Learning through Regularization Approach](http://ieeexplore.ieee.org/document/6137441/)
+    - [Learning Fair Representations](https://www.cs.toronto.edu/~toni/Papers/icml-final.pdf)
+    - [A Confidence-Based Approach for Balancing Fairness and Accuracy](https://arxiv.org/abs/1601.05764)
+    - [Fairness Beyond Disparate Treatment & Disparate Impact: Learning Classification without Disparate Mistreatment](https://arxiv.org/abs/1610.08452)
+    - [Fairness in Classic and Contextual Bandits](https://papers.nips.cc/paper/6355-fairness-in-learning-classic-and-contextual-bandits.pdf)
 
-*   Dec 14: **Fairness Mechanisms (continued)**
-
-*   Dec 15: **Belief Systems**
-
-      Axiomatic foundations of fairness and justice. Rawls and beyond.
-
-*   Dec 17: **Accountability**
+*   Dec 15: **Accountability**
 
       Probing black-box decision-makers: estimating influence of features.
 
@@ -79,17 +76,16 @@ So **please read the provided materials** ahead of the lecture and come prepared
     * [Algorithmic transparency via quantitative input influence](https://www.andrew.cmu.edu/user/danupam/datta-sen-zick-oakland16.pdf)
     * [Auditing Black-box Models for Indirect Influence.](http://sorelle.friedler.net/papers/auditing_icdm_2016.pdf)
 
-*   Dec 18: **Interpretability**
+*   Dec 17: **Interpretability**
 
       Building interpretable models.
 
       *Readings*:
-
     * [Comprehensible Classification Models: A Review](http://www.kdd.org/exploration_files/V15-01-01-Freitas.pdf)
     * [Interpretable Models for Recidivism Prediction](https://arxiv.org/pdf/1503.07810v6.pdf) (based on the [SLIM](https://arxiv.org/abs/1405.4047) model)
     * [Modeling the Model](http://www.kdd.org/kdd2016/papers/files/rfp0573-ribeiroA.pdf)
 
-*   Dec 19: **Fairness, Accountability and Transparency in other areas of computer science**
+*   Dec 18: **Fairness, Accountability and Transparency in other areas of computer science**
 
       Beyond classification: unsupervised learning, representations, rankings and verification.
       *Readings*:
@@ -99,7 +95,10 @@ So **please read the provided materials** ahead of the lecture and come prepared
     * [Measuring fairness in ranked outputs.](https://arxiv.org/abs/1610.08559)
     * [Fairness as a program property.](https://arxiv.org/abs/1610.06067) 
 
+*   Dec 19: **Belief Systems**
 
+     Axiomatic foundations of fairness and justice. Rawls and beyond.
 
 ### Contact
+
 Email me at [suresh@cs.utah.edu](mailto:suresh@cs.utah.edu)
