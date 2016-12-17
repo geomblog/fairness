@@ -103,3 +103,7 @@ So **please read the provided materials** ahead of the lecture and come prepared
 ### Contact
 
 Email me at [suresh@cs.utah.edu](mailto:suresh@cs.utah.edu)
+
+This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
+
+![](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)
