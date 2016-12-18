@@ -25,18 +25,21 @@ Basics of machine learning -- supervised and unsupervised learning, empirical ri
 ####   Dec 12: **Automated Decision Making**: Case studies of the use of machine learning in applications. An introduction to different formal notions of fairness.
 
 * Criminal Justice:
-      * Risk Assessment: ([Primer](http://www.datacivilrights.org/pubs/2015-1027/Courts_and_Predictive_Algorithms.pdf), [discussion](http://www.datacivilrights.org/pubs/2015-1027/WDN-Courts_and_Predictive_Algorithms.pdf) from Data and Civil Rights Workshop)
-      * Predictive Policing: ([Primer](http://www.datacivilrights.org/pubs/2015-1027/Predictive_Policing.pdf) and [discussion](http://www.datacivilrights.org/pubs/2015-1027/WDN-Predictive_Policing.pdf))
-      * Julia Angwin, Jeff Larson, Surya Mattu, Lauren Kirchner, [“Machine Bias"](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing)
-      * [Video showing predictive policing in action](http://fusion.net/story/283896/real-future-episode-12-predictive-policing/)
+  * Risk Assessment: ([Primer](http://www.datacivilrights.org/pubs/2015-1027/Courts_and_Predictive_Algorithms.pdf), [discussion](http://www.datacivilrights.org/pubs/2015-1027/WDN-Courts_and_Predictive_Algorithms.pdf) from Data and Civil Rights Workshop)
+  * Predictive Policing: ([Primer](http://www.datacivilrights.org/pubs/2015-1027/Predictive_Policing.pdf) and [discussion](http://www.datacivilrights.org/pubs/2015-1027/WDN-Predictive_Policing.pdf))
+  * Julia Angwin, Jeff Larson, Surya Mattu, Lauren Kirchner, [“Machine Bias"](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing)
+  * [Video showing predictive policing in action](http://fusion.net/story/283896/real-future-episode-12-predictive-policing/)
+  
 * Hiring:
-      * [On how AI can be used in hiring](http://venturebeat.com/2016/11/09/ai-is-helping-job-candidates-bypass-resume-bias-and-black-holes/) (by one company that provides solutions). [Another perspective](http://www.ca.com/us/rewrite/articles/application-economy/can-artificial-intelligence-find-the-perfect-hire.html) 
-      * [Predicting Voice-elicited emotions](http://delivery.acm.org/10.1145/2790000/2788619/p1969-li.pdf?ip=71.195.244.110&id=2788619&acc=OA&key=4D4702B0C3E38B35%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35%2E4037F4931E565B6B&CFID=872166982&CFTOKEN=74413255&__acm__=1480927397_b769b575e3f06e480d52f70766f3a596) (from KDD 2015)
+  * [On how AI can be used in hiring](http://venturebeat.com/2016/11/09/ai-is-helping-job-candidates-bypass-resume-bias-and-black-holes/) (by one company that provides solutions). [Another perspective](http://www.ca.com/us/rewrite/articles/application-economy/can-artificial-intelligence-find-the-perfect-hire.html) 
+  * [Predicting Voice-elicited emotions](http://delivery.acm.org/10.1145/2790000/2788619/p1969-li.pdf?ip=71.195.244.110&id=2788619&acc=OA&key=4D4702B0C3E38B35%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35%2E4037F4931E565B6B&CFID=872166982&CFTOKEN=74413255&__acm__=1480927397_b769b575e3f06e480d52f70766f3a596) (from KDD 2015)
+      
 * Credit Scoring and Loans
-      * China's new [citizen scoring system](https://www.washingtonpost.com/world/asia_pacific/chinas-plan-to-organize-its-whole-society-around-big-data-a-rating-for-everyone/2016/10/20/1cd0dd9c-9516-11e6-ae9d-0030ac1899cd_story.html?utm_term=.f8184eeef71d)
-    * Education:
-      * ["19 Ways Data Analysis Empowered Students and Schools"](https://fpf.org/wp-content/uploads/2016/03/Final_19Times-Data_Mar2016-1.pdf) pages 21-26.
-      * [Promise and limits of learning analytics](http://www.chronicle.com.libproxy.ocean.edu:2048/article/This-Chart-Shows-the-Promise/234573)
+  * China's new [citizen scoring system](https://www.washingtonpost.com/world/asia_pacific/chinas-plan-to-organize-its-whole-society-around-big-data-a-rating-for-everyone/2016/10/20/1cd0dd9c-9516-11e6-ae9d-0030ac1899cd_story.html?utm_term=.f8184eeef71d)
+
+* Education:
+  * ["19 Ways Data Analysis Empowered Students and Schools"](https://fpf.org/wp-content/uploads/2016/03/Final_19Times-Data_Mar2016-1.pdf) pages 21-26.
+  * [Promise and limits of learning analytics](http://www.chronicle.com.libproxy.ocean.edu:2048/article/This-Chart-Shows-the-Promise/234573)
 
 *Readings* (notions of fairness):  
 
