@@ -20,9 +20,9 @@ So **please read the provided materials** ahead of the lecture and come prepared
 
 *   Dec 12: **Automated Decision Making**
 
-    Case studies of the use of machine learning in applications. An introduction to different formal notions of fairness.
+      Case studies of the use of machine learning in applications. An introduction to different formal notions of fairness.
 
-    *Readings* (applications):
+      *Readings* (applications):
 
     * Criminal Justice:
       * Risk Assessment: ([Primer](http://www.datacivilrights.org/pubs/2015-1027/Courts_and_Predictive_Algorithms.pdf), [discussion](http://www.datacivilrights.org/pubs/2015-1027/WDN-Courts_and_Predictive_Algorithms.pdf) from Data and Civil Rights Workshop)
@@ -48,16 +48,16 @@ So **please read the provided materials** ahead of the lecture and come prepared
 
 *   Dec 13: **Fairness Mechanisms**
 
-        Understanding the different techniques for ensuring fairness in classification.
+          Understanding the different techniques for ensuring fairness in classification.
 
-        *Readings* (preprocessing and detection)
+          *Readings* (preprocessing and detection)
     * [Detecting discriminatory rules in a rule-based system](http://pages.di.unipi.it/ruggieri/Papers/tkdd.pdf)
     * [Detecting discriminatory black box decision-making](https://arxiv.org/abs/1412.3756) (and repairing it)
     * [Data preprocessing techniques for classification without discrimination](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2&ved=0ahUKEwiLtYnNit7QAhWHiVQKHcUaAE8QFggkMAE&url=https%3A%2F%2Fpdfs.semanticscholar.org%2F1a43%2Fd5a8f3dd82a138c92911befba05ae98add27.pdf&usg=AFQjCNHwZ1vsGzJRLsbv4QoW-gLX3DIyCg&sig2=0TikurXGq184Xoqi7O6eMw). 
 
 *   Dec 14: **Fairness Mechanisms** (continued)
 
-      *Readings* (building a better classifier)
+        *Readings* (building a better classifier)
 
     - [Discrimination Aware Decision Tree Learning](http://wwwis.win.tue.nl/~tcalders/pubs/ICDM2010KCP.pdf)
     - [Three Naive Bayes Approaches for Discrimination-Free Classification](https://pdfs.semanticscholar.org/a087/d3893af0276fe3b41924087670b03997f7af.pdf)
@@ -69,9 +69,9 @@ So **please read the provided materials** ahead of the lecture and come prepared
 
 *   Dec 15: **Accountability via Influence Estimation**
 
-        Probing black-box decision-makers: estimating influence of features.
+          Probing black-box decision-makers: estimating influence of features.
 
-        *Readings*:
+          *Readings*:
     * Breiman's idea for testing classifiers ([Section 10](https://www.stat.berkeley.edu/~breiman/randomforest2001.pdf))
     * [A peek into the black box](http://link.springer.com/article/10.1007/s10618-014-0368-8)
     * [Algorithmic transparency via quantitative input influence](https://www.andrew.cmu.edu/user/danupam/datta-sen-zick-oakland16.pdf)
@@ -79,17 +79,21 @@ So **please read the provided materials** ahead of the lecture and come prepared
 
 *   Dec 17: **Interpretability**
 
-        Building interpretable models.
+          Building interpretable models.
 
-        *Readings*:
+          *Readings*:
     * [Comprehensible Classification Models: A Review](http://www.kdd.org/exploration_files/V15-01-01-Freitas.pdf)
+    * [Statistical Learning with Sparsity](http://web.stanford.edu/~hastie/StatLearnSparsity/)
     * [Interpretable Models for Recidivism Prediction](https://arxiv.org/pdf/1503.07810v6.pdf) (based on the [SLIM](https://arxiv.org/abs/1405.4047) model)
+    * [Rule Extraction from Linear Support Vector Machines](https://pdfs.semanticscholar.org/fee0/648c150b052f4d4754151cb80fe0ea1f828d.pdf)
+    * [Comprehensible Credit Scoring Models Using Rule Extraction From Support Vector Machines](https://core.ac.uk/download/pdf/6304402.pdf)
     * [Modeling the Model](http://www.kdd.org/kdd2016/papers/files/rfp0573-ribeiroA.pdf)
+    * [EU Regulations on Right to Explanations.](https://arxiv.org/abs/1606.08813)
 
 *   Dec 18: **Fairness, Accountability and Transparency in other areas of computer science**
 
-        Beyond classification: unsupervised learning, representations, rankings and verification.
-        *Readings*:
+          Beyond classification: unsupervised learning, representations, rankings and verification.
+          *Readings*:
     * Gender bias in word embeddings: two views. 
       * [Man is to Computer Programmer as Woman is to Homemaker? Debiasing Word Embeddings](https://arxiv.org/abs/1607.06520)
       * [Semantics derived automatically from language corpora necessarily contain human biases](http://randomwalker.info/publications/language-bias.pdf)
@@ -98,7 +102,16 @@ So **please read the provided materials** ahead of the lecture and come prepared
 
 *   Dec 19: **Belief Systems**
 
-       Axiomatic foundations of fairness and justice. Rawls and beyond.
+    Axiomatic approaches to thinking about fairness. 
+
+    *Readings*:
+
+    * [On the (im)possibility of fairness](https://arxiv.org/abs/1609.07236)
+
+    * [Equality of Opportunity.](https://en.wikipedia.org/wiki/Equal_opportunity)
+
+      ​
+
 
 ### Contact
 
