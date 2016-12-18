@@ -14,6 +14,7 @@ This is a short (and intense) course. We'll cover material in two lecture chunks
 So **please read the provided materials** ahead of the lecture and come prepared with your questions, comments and critiques. You'll benefit the most from the material if you have time to engage with it. 
 
 ### Syllabus
+
 #### Dec 11: **Preliminaries**
 
 Basics of machine learning -- supervised and unsupervised learning, empirical risk minimization, classifiers, regression, training and generalization. 
