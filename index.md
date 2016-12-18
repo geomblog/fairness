@@ -57,21 +57,22 @@ So **please read the provided materials** ahead of the lecture and come prepared
 
 *   Dec 14: **Fairness Mechanisms** (continued)
 
-   *Readings* (building a better classifier)
+	*Readings* (building a better classifier)
 
-    - [Discrimination Aware Decision Tree Learning](http://wwwis.win.tue.nl/~tcalders/pubs/ICDM2010KCP.pdf)
-    - [Three Naive Bayes Approaches for Discrimination-Free Classification](https://pdfs.semanticscholar.org/a087/d3893af0276fe3b41924087670b03997f7af.pdf)
-    - [Fairness-aware Learning through Regularization Approach](http://ieeexplore.ieee.org/document/6137441/)
-    - [Learning Fair Representations](https://www.cs.toronto.edu/~toni/Papers/icml-final.pdf)
-    - [A Confidence-Based Approach for Balancing Fairness and Accuracy](https://arxiv.org/abs/1601.05764)
-    - [Fairness Beyond Disparate Treatment & Disparate Impact: Learning Classification without Disparate Mistreatment](https://arxiv.org/abs/1610.08452)
-    - [Fairness in Classic and Contextual Bandits](https://papers.nips.cc/paper/6355-fairness-in-learning-classic-and-contextual-bandits.pdf)
+	* [Discrimination Aware Decision Tree Learning](http://wwwis.win.tue.nl/~tcalders/pubs/ICDM2010KCP.pdf)
+    * [Three Naive Bayes Approaches for Discrimination-Free Classification](https://pdfs.semanticscholar.org/a087/d3893af0276fe3b41924087670b03997f7af.pdf)
+    * [Fairness-aware Learning through Regularization Approach](http://ieeexplore.ieee.org/document/6137441/)
+	* [Learning Fair Representations](https://www.cs.toronto.edu/~toni/Papers/icml-final.pdf)
+    * [A Confidence-Based Approach for Balancing Fairness and Accuracy](https://arxiv.org/abs/1601.05764)
+    * [Fairness Beyond Disparate Treatment & Disparate Impact: Learning Classification without Disparate Mistreatment](https://arxiv.org/abs/1610.08452)
+    * [Fairness in Classic and Contextual Bandits](https://papers.nips.cc/paper/6355-fairness-in-learning-classic-and-contextual-bandits.pdf)
 
 *   Dec 15: **Accountability via Influence Estimation**
 
 	Probing black-box decision-makers: estimating influence of features.
 
-    *Readings*:
+	*Readings*:
+
     * Breiman's idea for testing classifiers ([Section 10](https://www.stat.berkeley.edu/~breiman/randomforest2001.pdf))
     * [A peek into the black box](http://link.springer.com/article/10.1007/s10618-014-0368-8)
     * [Algorithmic transparency via quantitative input influence](https://www.andrew.cmu.edu/user/danupam/datta-sen-zick-oakland16.pdf)
