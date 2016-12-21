@@ -15,7 +15,11 @@ In this lecture we will survey a number of different ways of building fairness-a
 
 All models reviewed in this lecture will focus on statistical discrepancy or its variants. In the next lecture we will look at methods that build models for other notions of fairness. 
 
-# Decision Trees
+<a name="section1">
+
+# Changing the model construction algorithm
+
+</a>
 
 We start with decision trees and statistical parity. The goal is to build a decision tree that respects statistical parity while still being an accurate classifier. Recall that one standard method to build decision trees uses entropy to measure information gain in the tree. As usual, let the input $D$ consist of pairs $(\vec{x}, y)$, and let $g(x)$ denote the protected attribute. The class entropy $H_c(D)$ is constructed by computing the fractions $p_i = |\{ (\vec{x}, y) \in D\mid  y = i\} |/|D|$, and then setting 
 
@@ -41,7 +45,7 @@ Specifically, the algorithm computes, for each leaf, how accuracy will change if
 
 Interesting, the authors find that this latter strategy (build a model and then fix it) appears to work better than baking the fairness criterion into the tree construction. 
 
-# Naïve Bayes
+# Changing the underlying probabilistic model
 
 Let us consider the Naïve Bayes model now. Recall that the goal of such a model is to compute the probaiblities $\Pr(C \mid x)$. If an input $x$ can be written as the set of features $x = x_1x_2\ldots x_n$, then the Naïve Bayes model uses Bayes' theorem as well as the assumption of class-conditioned variable independence to write this probability as 
 
@@ -89,6 +93,12 @@ where $\Pr(X, S)$ represents the distribution of the inputs and can be estimated
 
 Assembling all of this together, we get a single estimated expression for the mutual information $I(Y;S)$ which can then be added as a regularization term to the cost minimization. 
 
-# SVMs
+# Shifting the decision boundary
 
-Kun et al generalize the idea of shifting the decision boundary with theoretical backing. They argue that by shifting the boundary by a tuned parameter $\lambda$ in order to maintain statistical parity, they retain certain accuracy characteristics of the original data, relying on results from boosting. 
+In Section [one](#section1) one of the strategies employed was to build a classifier and then change labels at the leaves. A simliar idea (changing the decision boundary) can be employed in a more geometric setting with any technique where the decision boundary can be expressed as a sign of a *confidence* function. The method we will describe applies for example to methods like logistic regression, AdaBoost as well as SVMs. 
+
+At a high level, the idea (*cite*) is the following. Suppose that the classifier can be expressed as $y = \text{sign}(\text{conf}(x))$ where $\text{conf}(x)$ is some function from $\mathbb{R}^d$ to $\mathbb{R}$. Fix a parameter $\lambda$ and define a new classifier 
+
+$$ h_\lambda(x) = \begin{cases} 1 & \text{conf}(x) \ge -\lambda \\ \text{sign}(\text{conf}(x)) & \text{otherwise} \end{cases} $$
+
+The parameter $\lambda$ *shifts* the decision boundary away from $0$. Now we can choose $\lambda$ so as to ensure statistical parity. The key insight behind this method is that the generalization accuracy of such a classification procedure depends on the *margin*: the gap between in $\text{conf}(x)$ between the last point classified as $-1$ and the first point classified as $+1$. Shifting the decision boundary in ths manner changes the margin, but does so in a way that we can still prove bounds on the accuracy of such a shifted classifier, obtaining a clearer tradeoff between fairness and accuracy. 
