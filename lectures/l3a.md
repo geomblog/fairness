@@ -3,7 +3,7 @@ subtitle: "Lecture 3: Fairness Mechanisms"
 title: "GIAN Course on Fairness, Accuracy and Transparency in Machine Learning"
 author: "Suresh Venkatasubramanian"
 date: "Dec 14, 2016"
-
+bibliography: fatcs.bib
 
 ---
 
@@ -31,7 +31,7 @@ $$ I_c(D) = H_c(D) - \sum p_i H_c(D_i)$$
 
 is maximized, where $p_i = |D_i|/|D|$.
 
-The new idea here is to incorporate statistical bias considerations into the split function. Let us define a notion of entropy for the group variable $g(x)$ as before.
+The new idea here, proposed by Kamiran et al. is to incorporate statistical bias considerations into the split function. [@kamiran_discrimination_2010] Let us define a notion of entropy for the group variable $g(x)$ as before.
 
 $$ H_g(D) = \sum p_i \log \frac{1}{p_i} $$
 
@@ -51,7 +51,7 @@ Let us consider the Naïve Bayes model now. Recall that the goal of such a model
 
 $$ \Pr(C \mid x) = \frac{\Pr(C) \prod_i \Pr(x_i|C)}{\Pr(x)}$$
 
-The approaches proposed by the author work by modifying the assumed generative structure given above.
+The approaches proposed by the Calders et al. work by modifying the assumed generative structure given above. [@calders_three_2010]
 
 ## Making $C$ depend directly on $S$
 
@@ -73,7 +73,7 @@ The paper also introduces a third variation that introduces a latent variable $L
 
 # Using a regularizer
 
-In machine learning, a standard way of finding a good model is to define a loss function that captures the model's effectiveness at classification and then find the model that minimizes cost. To add a constraint, we can either add it as a hard constraint or as a penalty term in the loss function — in this latter form the constraint is called a *regularizer*. This is a flexible strategy, for virtually any model build by cost minimization we can add a fairness-regularizer. The paper by Kamishima et al. (*cite*) takes this approach to ensuring fairness in logistic regression.
+In machine learning, a standard way of finding a good model is to define a loss function that captures the model's effectiveness at classification and then find the model that minimizes cost. To add a constraint, we can either add it as a hard constraint or as a penalty term in the loss function — in this latter form the constraint is called a *regularizer*. This is a flexible strategy, for virtually any model build by cost minimization we can add a fairness-regularizer. The paper by Kamishima et al. [@kamishima_fairness-aware_2011] takes this approach to ensuring fairness in logistic regression.
 
 I'll focus primarily on how the term in the loss function for fairness is introduced. The actual loss function includes other terms for other desired characteristics that are not as relevant to our discussion.
 
@@ -97,7 +97,7 @@ Assembling all of this together, we get a single estimated expression for the mu
 
 In Section [one](#section1), one of the strategies employed was to build a classifier and then change labels at the leaves. A similar idea (changing the decision boundary) can be employed in a more geometric setting with any technique where the decision boundary can be expressed as a sign of a *confidence* function. The method we will describe applies for example to methods like logistic regression, AdaBoost as well as SVMs.
 
-At a high level, the idea (*cite*) is the following. Suppose that the classifier can be expressed as $y = \text{sign}(\text{conf}(x))$ where $\text{conf}(x)$ is some function from $\mathbb{R}^d$ to $\mathbb{R}$. Fix a parameter $\lambda$ and define a new classifier
+At a high level, the idea [@zafar_fairness_2016] is the following. Suppose that the classifier can be expressed as $y = \text{sign}(\text{conf}(x))$ where $\text{conf}(x)$ is some function from $\mathbb{R}^d$ to $\mathbb{R}$. Fix a parameter $\lambda$ and define a new classifier
 
 $$ h_\lambda(x) = \begin{cases} 1 & \text{conf}(x) \ge -\lambda \\ \text{sign}(\text{conf}(x)) & \text{otherwise} \end{cases} $$
 
